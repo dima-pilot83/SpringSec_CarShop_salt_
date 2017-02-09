@@ -1,0 +1,222 @@
+html,
+body {
+   height: 100%;
+}
+div#space {
+   float: left;
+   height: 50%;
+   margin-bottom: -500px;
+   width: 1px;
+}
+div#container {
+   clear: left;
+   height: 1000px;
+   margin: 0 auto;
+   position: relative;
+   width: 989px;
+}
+body {
+   background-color: #696969;
+   background-image: url(images/login_bkgrnd.png);
+   background-repeat: repeat-x;
+   color: #000000;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
+#PageHeader1 {
+   -moz-box-shadow: 0px 0px 5px #000000;
+   -moz-box-sizing: border-box;
+   -webkit-box-shadow: 0px 0px 5px #000000;
+   background-color: transparent;
+   background-image: none;
+   box-shadow: 0px 0px 5px #000000;
+   box-sizing: border-box;
+}
+#Text1 {
+   border: 0px #000000 solid;
+   margin: 0;
+}
+#wb_FontAwesomeIcon1 {
+   background-color: #A9A9A9;
+   background-image: none;
+   border: 0px #245580 solid;
+   padding: 0px 0px 0px 0px;
+   text-align: center;
+}
+#wb_FontAwesomeIcon1:hover {
+   background-color: #FFFFFF;
+   background-image: none;
+   border: 0px #245580 solid;
+}
+#FontAwesomeIcon1 {
+   height: 60px;
+   width: 60px;
+}
+#FontAwesomeIcon1 i {
+   color: #000000;
+   display: inline-block;
+   font-size: 60px;
+   line-height: 60px;
+   vertical-align: middle;
+   width: 56px;
+}
+#wb_FontAwesomeIcon1:hover i {
+   color: #337AB7;
+}
+#Image2 {
+   border: 0px #000000 solid;
+   height: 100%;
+   left: 0;
+   padding: 0px 0px 0px 0px;
+   top: 0;
+   width: 100%;
+}
+#Editbox3 {
+   background-color: #C0C0C0;
+   background-image: none;
+   border: 1px #000000 solid;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   border-radius: 4px;
+   color: #000000;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+   padding: 4px 4px 4px 4px;
+   text-align: left;
+   vertical-align: middle;
+}
+#Editbox3:focus {
+   -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   border-color: #66AFE9;
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   outline: 0;
+}
+#Editbox1 {
+   background-color: #C0C0C0;
+   background-image: none;
+   border: 1px #000000 solid;
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   border-radius: 4px;
+   color: #000000;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+   padding: 4px 4px 4px 4px;
+   text-align: left;
+   vertical-align: middle;
+}
+#Editbox1:focus {
+   -moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   -webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   border-color: #66AFE9;
+   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
+   outline: 0;
+}
+#wb_Text2 {
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   margin: 0;
+   padding: 0;
+   text-align: left;
+}
+#wb_Text2 div {
+   text-align: left;
+}
+#wb_Text3 {
+   background-color: transparent;
+   background-image: none;
+   border: 0px #000000 solid;
+   margin: 0;
+   padding: 0;
+   text-align: left;
+}
+#wb_Text3 div {
+   text-align: left;
+}
+#wb_Form1 {
+   background-color: transparent;
+   background-image: none;
+   border: 1px #CCCCCC solid;
+}
+#Button1 {
+   -moz-border-radius: 4px;
+   -webkit-border-radius: 4px;
+   background-color: #000000;
+   background-image: none;
+   border: 1px #2E6DA4 solid;
+   border-radius: 4px;
+   color: #FFFFFF;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+}
+#wb_TextMenu1 {
+   background-color: transparent;
+   background-image: none;
+   color: #000000;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+}
+#wb_TextMenu1 span {
+   margin: 0 4px 0 0px;
+}
+#NavigationBar1 ul.navbar {
+   list-style: none;
+   margin: 0;
+   padding: 0;
+}
+#NavigationBar1 ul.navbar li {
+   float: left;
+   height: 29px;
+   margin: 0 4px 0 0;
+   width: 234px;
+}
+#NavigationBar1 ul.navbar li a {
+   display: block;
+   position: relative;
+}
+#NavigationBar1 ul.navbar li a img {
+   border-width: 0;
+   left: 0;
+   position: absolute;
+   z-index: 1;
+}
+#NavigationBar1 ul.navbar li span {
+   display: block;
+   height: 29px;
+   position: absolute;
+   width: 234px;
+   z-index: 2;
+}
+#NavigationBar1 a .hover {
+   visibility: hidden;
+}
+#NavigationBar1 a:hover .hover {
+   visibility: visible;
+}
+#NavigationBar1 a:hover span {
+   visibility: hidden;
+}
+#Image1 {
+   border: 0px #000000 solid;
+   height: 100%;
+   left: 0;
+   padding: 0px 0px 0px 0px;
+   top: 0;
+   width: 100%;
+}
+#PageFooter1 {
+   -moz-box-sizing: border-box;
+   background-color: transparent;
+   background-image: none;
+   box-sizing: border-box;
+}

@@ -1,0 +1,12 @@
+body {
+   background-color: #808080;
+   background-image: url(images/register_bkgrnd.png);
+   background-repeat: repeat-x;
+   color: #000000;
+   font-family: Arial;
+   font-size: 13px;
+   font-weight: normal;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
