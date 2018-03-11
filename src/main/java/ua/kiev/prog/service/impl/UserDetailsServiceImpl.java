@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.kiev.prog.entity.CustomUser;
+import ua.kiev.prog.entity.EnhancedUser;
 import ua.kiev.prog.service.UserService;
 
 import java.util.HashSet;
@@ -28,6 +29,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(new SimpleGrantedAuthority(customUser.getRole().toString()));
 
-        return new User(customUser.getLogin(), customUser.getPassword(), roles);
+        // return new User(customUser.getLogin(), customUser.getPassword(), roles);
+        return new EnhancedUser(customUser.getLogin(), customUser.getPassword(), roles, customUser.getSalt());
     }
+
 }

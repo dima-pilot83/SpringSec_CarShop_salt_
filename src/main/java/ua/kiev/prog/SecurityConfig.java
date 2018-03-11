@@ -4,12 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
@@ -20,9 +23,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void registerGlobalAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-                .userDetailsService(userDetailsService)
-                .passwordEncoder(getShaPasswordEncoder());
+        ReflectionSaltSource rss = new ReflectionSaltSource();
+        rss.setUserPropertyToUse("salt");
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setSaltSource(rss);
+        provider.setUserDetailsService(userDetailsService);
+        provider.setPasswordEncoder(getShaPasswordEncoder());
+        auth.authenticationProvider(provider);
     }
 
     @Override
@@ -46,9 +53,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
                 .antMatchers("/hello").permitAll()
                 .and()
-        .exceptionHandling().accessDeniedPage("/unauthorized")
+                .exceptionHandling().accessDeniedPage("/unauthorized")
                 .and()
-        .formLogin()
+                .formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/j_spring_security_check")
                 .failureUrl("/login?error")
@@ -56,14 +63,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordParameter("j_password")
                 .permitAll()
                 .and()
-        .logout()
+                .logout()
                 .permitAll()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login?logout")
                 .invalidateHttpSession(true);
     }
 
-    private ShaPasswordEncoder getShaPasswordEncoder(){
-        return new ShaPasswordEncoder();
+    private ShaPasswordEncoder getShaPasswordEncoder() {
+
+        return new ShaPasswordEncoder(512);
+
     }
 }

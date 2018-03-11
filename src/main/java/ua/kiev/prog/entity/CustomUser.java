@@ -1,6 +1,7 @@
 package ua.kiev.prog.entity;
 
 import javax.persistence.*;
+
 import ua.kiev.prog.entity.enums.UserRole;
 
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class CustomUser {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "salt")
+    private String salt;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -39,27 +43,31 @@ public class CustomUser {
     @Column(name = "car_number")
     private String carNumber;
 
-    @OneToMany(mappedBy = "customUser",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-     private List<TakenServices> takenServices= new ArrayList<TakenServices>();
+    @OneToMany(mappedBy = "customUser", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<TakenServices> takenServices = new ArrayList<TakenServices>();
 
-    public CustomUser(String login, String password, UserRole role) {
+    public CustomUser() {
+    }
+
+    public CustomUser(String login, String password, String salt, UserRole role) {
         this.login = login;
         this.password = password;
+        this.salt = salt;
         this.role = role;
     }
 
-    public CustomUser(String login, String password, UserRole role, String name, String email, String telNumber, String carType, String carNumber) {
+
+    public CustomUser(String login, String password, String salt, UserRole role, String name, String email,
+            String telNumber, String carType, String carNumber) {
         this.login = login;
         this.password = password;
+        this.salt = salt;
         this.role = role;
         this.name = name;
         this.email = email;
         this.telNumber = telNumber;
         this.carType = carType;
         this.carNumber = carNumber;
-    }
-
-    public CustomUser() {
     }
 
     public long getId() {
@@ -84,6 +92,14 @@ public class CustomUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public UserRole getRole() {
@@ -137,6 +153,7 @@ public class CustomUser {
     public List<TakenServices> getTakenServices() {
         return takenServices;
     }
+
     public void setTakenServices(List<TakenServices> takenServices) {
         this.takenServices = takenServices;
     }
@@ -147,6 +164,7 @@ public class CustomUser {
                 "id=" + id +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
+                ", salt='" + salt + '\'' +
                 ", role=" + role +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
@@ -156,7 +174,5 @@ public class CustomUser {
                 ", takenServices=" + takenServices +
                 '}';
     }
-
-
 }
 

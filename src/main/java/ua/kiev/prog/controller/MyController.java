@@ -22,7 +22,7 @@ import ua.kiev.prog.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.math.BigDecimal;
-
+import java.security.SecureRandom;
 
 @Controller
 public class MyController {
@@ -35,7 +35,6 @@ public class MyController {
 
     private boolean NoDataSelected;
     private static final Logger log = Logger.getLogger(MyController.class);
-
 
     @RequestMapping("/")
     public String service(HttpSession session, HttpServletRequest request, Model model) {
@@ -67,7 +66,7 @@ public class MyController {
 
     @RequestMapping(value = "/takeservices", method = RequestMethod.POST)
     public String deleteservices(Model model, @RequestParam(name = "takeS", required = false) long[] id,
-                                 @RequestParam(required = false) String date) {
+            @RequestParam(required = false) String date) {
 
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String login = user.getUsername();
@@ -100,10 +99,10 @@ public class MyController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@RequestParam(required = false) String email,
-                         @RequestParam(required = false) String phone,
-                         @RequestParam(required = false) String name,
-                         @RequestParam(required = false) String carT,
-                         @RequestParam(required = false) String carN) {
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String carT,
+            @RequestParam(required = false) String carN) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String login = user.getUsername();
 
@@ -121,22 +120,28 @@ public class MyController {
 
     @RequestMapping(value = "/newuser", method = RequestMethod.POST)
     public String update(@RequestParam String login,
-                         @RequestParam String password,
-                         @RequestParam(required = false) String email,
-                         @RequestParam(required = false) String phone,
-                         @RequestParam(required = false) String name,
-                         @RequestParam(required = false) String carT,
-                         @RequestParam(required = false) String carN,
-                         Model model) {
+            @RequestParam String password,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phone,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String carT,
+            @RequestParam(required = false) String carN,
+            Model model) {
         if (userService.existsByLogin(login)) {
             model.addAttribute("exists", true);
             return "register";
         }
 
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder();
-        String passHash = encoder.encodePassword(password, null);
+        ShaPasswordEncoder encoder = new ShaPasswordEncoder(512);
 
-        CustomUser dbUser = new CustomUser(login, passHash, UserRole.USER, name, email, phone, carT, carN);
+        SecureRandom random = new SecureRandom();
+        byte bytes[] = new byte[512];
+        random.nextBytes(bytes);
+        String salt = new String(String.valueOf(bytes));
+
+        String passHash = encoder.encodePassword(password, salt);
+
+        CustomUser dbUser = new CustomUser(login, passHash, salt, UserRole.USER, name, email, phone, carT, carN);
         userService.addUser(dbUser);
 
         return "redirect:/";
