@@ -1,29 +1,47 @@
 package ua.kiev.prog.controller;
 
+import config.TestDataBaseConfig;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
+import ua.kiev.prog.service.UserService;
+
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 import java.security.SecureRandom;
 
-import static org.junit.Assert.*;
-
 /**
- * Created by Dmitriy on 11.03.2018.
+ * Created by Dmitriy on 12.03.2018.
  */
+@DirtiesContext
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = TestDataBaseConfig.class)
+@WebAppConfiguration
 public class MyControllerTest {
+
+    @Resource
+    private EntityManagerFactory emf;
+    protected EntityManager em;
+
+    @Resource
+    private UserService userService;
+
+    @Before
+    public void setUp() throws Exception {
+        em = emf.createEntityManager();
+    }
+
     @Test
     public void update() throws Exception {
-
-        SecureRandom random = new SecureRandom();
-        byte bytes[] = new byte[20];
-        byte bytes2[] = new byte[20];
-        random.nextBytes(bytes);
-        random.nextBytes(bytes2);
-        String salt = String.valueOf(bytes);
-
-        ShaPasswordEncoder encoder = new ShaPasswordEncoder(512);
-        String encodedPass = encoder.encodePassword("dima", salt);
-        System.out.println(encoder.isPasswordValid( encodedPass,"dima", salt));
+        userService.addUser(DataUtil.createCustomUser());
     }
 
 }
