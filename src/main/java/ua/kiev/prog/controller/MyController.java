@@ -119,7 +119,7 @@ public class MyController {
     }
 
     @RequestMapping(value = "/newuser", method = RequestMethod.POST)
-    public String update(@RequestParam String login,
+    public String create(@RequestParam String login,
             @RequestParam String password,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String phone,
